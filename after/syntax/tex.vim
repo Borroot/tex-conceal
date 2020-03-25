@@ -54,8 +54,6 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['quad'          , ' '],
 		\ ['langle'        , '⟨'],
 		\ ['rangle'        , '⟩'],
-		\ ['lmoustache'    , '⎛'],
-		\ ['rmoustache'    , '⎞'],
 		\ ['lnot'          , '¬'],
 		\ ['geqslant'      , '⩾'],
 		\ ['leqslant'      , '⩽'],
@@ -63,6 +61,7 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['models'        , '⊨'],
 		\ ['setminus'      , '\'],
 		\ ['where'         , '|'],
+		\ ['mid'           , '|'],
 		\ ['emptyset'      , 'Ø'],
 		\ ['iff'           , '↔'],
 		\ ['Leftrightarrow', '↔']]
@@ -243,9 +242,10 @@ if has('conceal') && &enc == 'utf-8'
 		syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\?text\|mbox\|mathrm\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
 	endif
 
-	" Recognise \begin{align} as a math environment to enable concealment there.
+	" Recognise align, align* and cases as a math environment to enable concealment there.
 	syn region texMathZoneA matchgroup=texStatement start="\\begin{align}"   matchgroup=texStatement end="\\end{align}"   keepend contains=@texMathZoneGroup
 	syn region texMathZoneA matchgroup=texStatement start="\\begin{align\*}" matchgroup=texStatement end="\\end{align\*}" keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start="\\begin{cases}"   matchgroup=texStatement end="\\end{align\*}" keepend contains=@texMathZoneGroup
 
 	" Add a syntax group for bold text in mathmode.
 	syn cluster texMathZoneGroup add=texBoldMathText

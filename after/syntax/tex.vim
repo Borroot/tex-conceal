@@ -17,8 +17,6 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['\\backslash'  , '\'],
 		\ ['<'            , '<'],
 		\ ['>'            , '>'],
-		\ ['\\langle'     , '⟨'],
-		\ ['\\rangle'     , '⟩'],
 		\ ['\\lceil'      , '⌈'],
 		\ ['\\rceil'      , '⌉'],
 		\ ['\\lfloor'     , '⌊'],
@@ -35,6 +33,8 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['\\Uparrow'    , '↑'],
 		\ ['\\updownarrow', '↕'],
 		\ ['\\Updownarrow', '⇕']]
+
+	"syn match texMathDelim contained 'llbracket' 'rrbracket'
 
 	for texMathDelim in s:texMathDelimList
 		exe "syn match texMathDelim '\\\\\\([bB]igg\\?\\|left\\|right\\)".texMathDelim[0]."' contained conceal cchar=".texMathDelim[1]
@@ -56,6 +56,8 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['quad'          , ' '],
 		\ ['langle'        , '⟨'],
 		\ ['rangle'        , '⟩'],
+		\ ['llbracket'     , '⟦'],
+		\ ['rrbracket'     , '⟧'],
 		\ ['lnot'          , '¬'],
 		\ ['geqslant'      , '⩾'],
 		\ ['leqslant'      , '⩽'],

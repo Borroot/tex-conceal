@@ -239,11 +239,11 @@ if has('conceal') && &enc == 'utf-8'
 
 	" Do spell checking inside of the correct tex text statements.
 	if !exists("g:tex_nospell") || !g:tex_nospell
-		syn region texMathText matchgroup=texStatement start='\\mathrm\s*{'                    end='}' concealends keepend contains=@texFoldGroup        containedin=texMathMatcher
-		syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|mbox\)\s*{' end='}' concealends keepend contains=@texFoldGroup,@Spell containedin=texMathMatcher
+		syn region texMathText matchgroup=texStatement start='\\mathrm\s*{'                            end='}' concealends keepend contains=@texFoldGroup        containedin=texMathMatcher
+		syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|texttt\|mbox\)\s*{' end='}' concealends keepend contains=@texFoldGroup,@Spell containedin=texMathMatcher
 	" Do not do any spell checking when it is turned of.
 	else
-		syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\?text\|mbox\|mathrm\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
+		syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|texttt\|mbox\|mathrm\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
 	endif
 
 	" Recognise align, align* and cases as a math environment to enable concealment there.

@@ -12,11 +12,13 @@ if has('conceal') && &enc == 'utf-8'
 
 	" Conceal Left/Right combinations.
 	let s:texMathDelimList = [
-		\ ['<'            , '<'],
-		\ ['>'            , '>'],
 		\ ['|'            , '|'],
 		\ ['\\|'          , '‖'],
 		\ ['\\backslash'  , '\'],
+		\ ['<'            , '<'],
+		\ ['>'            , '>'],
+		\ ['\\langle'     , '⟨'],
+		\ ['\\rangle'     , '⟩'],
 		\ ['\\lceil'      , '⌈'],
 		\ ['\\rceil'      , '⌉'],
 		\ ['\\lfloor'     , '⌊'],

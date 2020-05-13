@@ -2,6 +2,8 @@
 " Maintainer: Bram Pulles
 
 if has('conceal') && &enc == 'utf-8'
+	highlight clear Conceal
+
 	" Misc.
 	syn match texDelimiter  '\\{'        contained conceal cchar={
 	syn match texDelimiter  '\\}'        contained conceal cchar=}
@@ -33,8 +35,6 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['\\Uparrow'    , '↑'],
 		\ ['\\updownarrow', '↕'],
 		\ ['\\Updownarrow', '⇕']]
-
-	"syn match texMathDelim contained 'llbracket' 'rrbracket'
 
 	for texMathDelim in s:texMathDelimList
 		exe "syn match texMathDelim '\\\\\\([bB]igg\\?\\|left\\|right\\)".texMathDelim[0]."' contained conceal cchar=".texMathDelim[1]

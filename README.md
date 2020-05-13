@@ -1,9 +1,9 @@
-# tex-conceal
+# vim-texcloak
 A vim plugin for extended concealment of symbols in tex files.
 
 ## Installation 
 ```
-Plug 'borroot/tex-conceal', {'for': 'tex'}
+Plug 'borroot/vim-texcloak', {'for': 'tex'}
 ```
 
 ## Settings

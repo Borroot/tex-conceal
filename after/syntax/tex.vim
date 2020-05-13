@@ -37,7 +37,8 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['\\Updownarrow', '⇕']]
 
 	for texMathDelim in s:texMathDelimList
-		exe "syn match texMathDelim '\\\\\\([bB]igg\\?\\|left\\|right\\)".texMathDelim[0]."' contained conceal cchar=".texMathDelim[1]
+		execute "syn match texMathDelim '\\\\\\([bB]igg\\?\\|left\\|right\\)" .
+		      \ texMathDelim[0] . "' contained conceal cchar=" . texMathDelim[1]
 	endfor
 
 	" Extra math symbols or redefinitions.
@@ -71,7 +72,8 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['Leftrightarrow', '↔']]
 
 	for texMath in s:texMathList
-		exe "syn match texMathSymbol '\\\\".texMath[0]."' contained conceal cchar=".texMath[1]
+		execute "syn match texMathSymbol '\\\\" . texMath[0] .
+		      \ "' contained conceal cchar=" . texMath[1]
 	endfor
 
 	" Sub scripts with numbers, letters and symbols mixed but smartly.
@@ -116,13 +118,14 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['\\rho'   , 'ᵨ']]
 
 	for texSubScript in s:texSubScriptList
-		exe "syn match texSubScriptBetter '".texSubScript[0]."' contained conceal cchar=".texSubScript[1]
+		execute "syn match texSubScriptBetter '" . texSubScript[0] .
+		      \ "' contained conceal cchar=" . texSubScript[1]
 	endfor
 
-	" Here we will make sure that the subscripts will only be concealed if ALL of the
-	" numbers/letters/symbols have a subscript equivalent, otherwise it is not concealed.
-	" NOTE: This is super ugly, so please inform me if you know a better way.
-	syn match texMathSymbol '_\(\([0-9]\|a\|e\|h\|i\|j\|k\|l\|m\|n\|o\|p\|r\|s\|t\|u\|v\|x\|+\|-\|=\|(\|)\|\\phi\|\\chi\|\\beta\|\\gamma\|\\rho\)\|{\([0-9]\|a\|e\|h\|i\|j\|k\|l\|m\|n\|o\|p\|r\|s\|t\|u\|v\|x\|+\|-\|=\|(\|)\|\\phi\|\\chi\|\\beta\|\\gamma\|\\rho\| \)\+}\)' contained conceal contains=texSubScriptBetter
+	" Here we will make sure that the subscripts will only be concealed iff ALL
+	" of the numbers/letters/symbols have a subscript equivalent.
+	syn match texMathSymbol '_\(\([0-9]\|a\|e\|h\|i\|j\|k\|l\|m\|n\|o\|p\|r\|s\|t\|u\|v\|x\|+\|-\|=\|(\|)\|\\phi\|\\chi\|\\beta\|\\gamma\|\\rho\)\|{\([0-9]\|a\|e\|h\|i\|j\|k\|l\|m\|n\|o\|p\|r\|s\|t\|u\|v\|x\|+\|-\|=\|(\|)\|\\phi\|\\chi\|\\beta\|\\gamma\|\\rho\| \)\+}\)'
+	  \ contained conceal contains=texSubScriptBetter
 
 	" Super scripts with numbers, letters and symbols mixed but smartly.
 	let s:texSuperScriptList = [
@@ -191,15 +194,17 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['\.','˙']]
 
 	for texSuperScript in s:texSuperScriptList
-		exe "syn match texSuperScriptBetter '".texSuperScript[0]."' contained conceal cchar=".texSuperScript[1]
+		execute "syn match texSuperScriptBetter '" . texSuperScript[0] .
+		      \ "' contained conceal cchar=" . texSuperScript[1]
 	endfor
 
-	" Here we will make sure that the superscripts will only be concealed if ALL of the
-	" numbers/letters/symbols have a superscript equivalent, otherwise it is not concealed.
-	" Furthermore if there are multiple characters they either all have to be numbers or no
-	" numbers at all since the superscript numbers have a different height than the rest.
-	" NOTE: This is super ugly, so please inform me if you know a better way.
-	syn match texMathSymbol '\^\(\([0-9]\|a\|b\|c\|d\|e\|f\|g\|h\|i\|j\|k\|l\|m\|n\|o\|p\|r\|s\|t\|u\|v\|w\|x\|y\|z\|A\|B\|D\|E\|G\|H\|I\|J\|K\|L\|M\|N\|O\|P\|R\|T\|U\|W\|+\|-\|<\|>\|/\|(\|)\|=\|\.\)\|{\(a\|b\|c\|d\|e\|f\|g\|h\|i\|j\|k\|l\|m\|n\|o\|p\|r\|s\|t\|u\|v\|w\|x\|y\|z\|A\|B\|D\|E\|G\|H\|I\|J\|K\|L\|M\|N\|O\|P\|R\|T\|U\|W\|+\|-\|<\|>\|/\|(\|)\|=\|\.\| \)\+}\|{[0-9]\+}\)' contained conceal contains=texSuperScriptBetter
+	" Here we will make sure that the superscripts will only be concealed iff
+	" ALL of the numbers/letters/symbols have a superscript equivalent.
+	" Furthermore if there are multiple characters they either all have to be
+	" numbers or no numbers at all since the superscript numbers have a
+	" different height than the rest.
+	syn match texMathSymbol '\^\(\([0-9]\|a\|b\|c\|d\|e\|f\|g\|h\|i\|j\|k\|l\|m\|n\|o\|p\|r\|s\|t\|u\|v\|w\|x\|y\|z\|A\|B\|D\|E\|G\|H\|I\|J\|K\|L\|M\|N\|O\|P\|R\|T\|U\|W\|+\|-\|<\|>\|/\|(\|)\|=\|\.\)\|{\(a\|b\|c\|d\|e\|f\|g\|h\|i\|j\|k\|l\|m\|n\|o\|p\|r\|s\|t\|u\|v\|w\|x\|y\|z\|A\|B\|D\|E\|G\|H\|I\|J\|K\|L\|M\|N\|O\|P\|R\|T\|U\|W\|+\|-\|<\|>\|/\|(\|)\|=\|\.\| \)\+}\|{[0-9]\+}\)'
+	  \ contained conceal contains=texSuperScriptBetter
 
 	" All \mathbb characters.
 	let s:texMathSymbolBbList = [
@@ -232,32 +237,42 @@ if has('conceal') && &enc == 'utf-8'
 		\ ['Z', 'ℤ']]
 
 	for texMathSymbolBb in s:texMathSymbolBbList
-		exe "syn match texMathSymbolBb '".texMathSymbolBb[0]."' contained conceal cchar=".texMathSymbolBb[1]
+		execute "syn match texMathSymbolBb '" . texMathSymbolBb[0] .
+		      \ "' contained conceal cchar=" . texMathSymbolBb[1]
 	endfor
 
-	syn match texMathSymbol '\\mathbb{\(\s\|[A-Z]\)\+}' contained conceal contains=texMathSymbolBb
+	syn match texMathSymbol '\\mathbb{\(\s\|[A-Z]\)\+}' contained conceal
+	  \ contains=texMathSymbolBb
 
 	" Do spell checking inside of the correct tex text statements.
 	if !exists("g:tex_nospell") || !g:tex_nospell
-		syn region texMathText matchgroup=texStatement start='\\mathrm\s*{'                            end='}' concealends keepend contains=@texFoldGroup        containedin=texMathMatcher
-		syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|texttt\|mbox\)\s*{' end='}' concealends keepend contains=@texFoldGroup,@Spell containedin=texMathMatcher
+		syn region texMathText matchgroup=texStatement start='\\mathrm\s*{' end='}'
+		  \ concealends keepend contains=@texFoldGroup        containedin=texMathMatcher
+		syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|texttt\|mbox\)\s*{' end='}'
+		  \ concealends keepend contains=@texFoldGroup,@Spell containedin=texMathMatcher
 	" Do not do any spell checking when it is turned of.
 	else
-		syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|texttt\|mbox\|mathrm\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
+		syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|texttt\|mbox\|mathrm\)\s*{' end='}'
+		  \ concealends keepend contains=@texFoldGroup containedin=texMathMatcher
 	endif
 
 	" Recognise align, align* and cases as a math environment to enable concealment there.
-	syn region texMathZoneA matchgroup=texStatement start="\\begin{align}"   matchgroup=texStatement end="\\end{align}"   keepend contains=@texMathZoneGroup
-	syn region texMathZoneA matchgroup=texStatement start="\\begin{align\*}" matchgroup=texStatement end="\\end{align\*}" keepend contains=@texMathZoneGroup
-	syn region texMathZoneA matchgroup=texStatement start="\\begin{cases}"   matchgroup=texStatement end="\\end{align\*}" keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start="\\begin{align}"
+	  \ matchgroup=texStatement end="\\end{align}"   keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start="\\begin{align\*}"
+	  \ matchgroup=texStatement end="\\end{align\*}" keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start="\\begin{cases}"
+	  \ matchgroup=texStatement end="\\end{align\*}" keepend contains=@texMathZoneGroup
 
 	" Add a syntax group for bold text in mathmode.
 	syn cluster texMathZoneGroup add=texBoldMathText
 	highlight texBoldMathText cterm=bold gui=bold
 
 	" Hide \mathbf and \bm and make it bold. Text which is bold and italics.
-	syn region texBoldMathText  matchgroup=texStatement start='\\\(mathbf\|bm\|textbf\){' end='}' concealends contains=@texMathZoneGroup containedin=texMathMatcher
-	syn region texBoldItalStyle matchgroup=texTypeStyle start="\\\(emph\|texttt\){"       end="}" concealends contains=@texItalGroup
+	syn region texBoldMathText  matchgroup=texStatement start='\\\(mathbf\|bm\|textbf\){' end='}'
+	  \ concealends contains=@texMathZoneGroup containedin=texMathMatcher
+	syn region texBoldItalStyle matchgroup=texTypeStyle start="\\\(emph\|texttt\){"       end="}"
+	  \ concealends contains=@texItalGroup
 
 	" If this is not set then the unicode charaters break monospacing when text is concealed.
 	set ambiwidth=single

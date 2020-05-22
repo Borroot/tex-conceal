@@ -245,9 +245,9 @@ if has('conceal') && &enc == 'utf-8'
 	endif
 
 	" Recognise align, align* and cases as a math environment to enable concealment there.
-	syn region texMathZoneA matchgroup=texStatement start="\\begin{align}"   matchgroup=texStatement end="\\end{align}"   keepend contains=@texMathZoneGroup
-	syn region texMathZoneA matchgroup=texStatement start="\\begin{align\*}" matchgroup=texStatement end="\\end{align\*}" keepend contains=@texMathZoneGroup
-	syn region texMathZoneA matchgroup=texStatement start="\\begin{cases}"   matchgroup=texStatement end="\\end{align\*}" keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start='\\begin{align}'   matchgroup=texStatement end='\\end{align}'   keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start='\\begin{align\*}' matchgroup=texStatement end='\\end{align\*}' keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start='\\begin{cases}'   matchgroup=texStatement end='\\end{align\*}' keepend contains=@texMathZoneGroup
 
 	" Add a syntax group for bold text in mathmode.
 	syn cluster texMathZoneGroup add=texBoldMathText
@@ -255,7 +255,7 @@ if has('conceal') && &enc == 'utf-8'
 
 	" Hide \mathbf and \bm and make it bold. Text which is bold and italics.
 	syn region texBoldMathText  matchgroup=texStatement start='\\\(mathbf\|bm\|textbf\){' end='}' concealends contains=@texMathZoneGroup containedin=texMathMatcher
-	syn region texBoldItalStyle matchgroup=texTypeStyle start="\\\(emph\|texttt\){"       end="}" concealends contains=@texItalGroup
+	syn region texBoldItalStyle matchgroup=texTypeStyle start='\\\(emph\|texttt\){'       end='}' concealends contains=@texItalGroup
 
 	" If this is not set then the unicode charaters break monospacing when text is concealed.
 	set ambiwidth=single

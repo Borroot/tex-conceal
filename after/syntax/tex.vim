@@ -245,9 +245,11 @@ if has('conceal') && &enc == 'utf-8'
 	endif
 
 	" Recognise align, align* and cases as a math environment to enable concealment there.
-	syn region texMathZoneA matchgroup=texStatement start='\\begin{align}'   matchgroup=texStatement end='\\end{align}'   keepend contains=@texMathZoneGroup
-	syn region texMathZoneA matchgroup=texStatement start='\\begin{align\*}' matchgroup=texStatement end='\\end{align\*}' keepend contains=@texMathZoneGroup
-	syn region texMathZoneA matchgroup=texStatement start='\\begin{cases}'   matchgroup=texStatement end='\\end{align\*}' keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start='\\begin{align}'      matchgroup=texStatement end='\\end{align}'      keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start='\\begin{align\*}'    matchgroup=texStatement end='\\end{align\*}'    keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start='\\begin{equation}'   matchgroup=texStatement end='\\end{equation}'   keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start='\\begin{equation\*}' matchgroup=texStatement end='\\end{equation\*}' keepend contains=@texMathZoneGroup
+	syn region texMathZoneA matchgroup=texStatement start='\\begin{cases}'      matchgroup=texStatement end='\\end{cases}'      keepend contains=@texMathZoneGroup
 
 	" Add a syntax group for bold text in mathmode.
 	syn cluster texMathZoneGroup add=texBoldMathText
